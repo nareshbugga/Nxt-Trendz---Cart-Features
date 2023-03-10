@@ -29,7 +29,7 @@ class App extends Component {
       this.setState(prevState => ({
         cartList: prevState.cartList.map(eachItem => {
           if (eachItem.title === title) {
-            return {...eachItem, quantity: eachItem.quantity + 1}
+            return {...eachItem, quantity: eachItem.quantity + product.quantity}
           }
           return eachItem
         }),
