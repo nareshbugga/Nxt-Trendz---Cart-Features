@@ -53,7 +53,8 @@ class App extends Component {
     this.setState(prevState => ({
       cartList: prevState.cartList.map(eachItem => {
         if (eachItem.id === id) {
-          return {...eachItem, quantity: eachItem.quantity + 1}
+          const updateQuantity = eachItem.quantity + 1
+          return {...eachItem, quantity: updateQuantity}
         }
         return eachItem
       }),
@@ -65,17 +66,18 @@ class App extends Component {
     const checkItem = cartList.find(eachItem => eachItem.id === id)
 
     const {quantity} = checkItem
-    if (quantity <= 1) {
-      this.removeAllCartItems(id)
-    } else {
+    if (quantity > 1) {
       this.setState(prevState => ({
         cartList: prevState.cartList.map(eachItem => {
           if (eachItem.id === id) {
-            return {...eachItem, quantity: eachItem.quantity - 1}
+            const updateQuantity = eachItem.quantity - 1
+            return {...eachItem, quantity: updateQuantity}
           }
           return eachItem
         }),
       }))
+    } else {
+      this.removeCartItem(id)
     }
   }
 
